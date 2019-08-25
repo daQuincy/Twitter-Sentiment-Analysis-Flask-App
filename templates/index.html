@@ -1,0 +1,72 @@
+<html>
+
+<head>
+    <title>Twitter Sentiment Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <h1 id="title">Twitter Sentiment Analysis</h1>
+
+    <p id="subtitle">
+        Welcome!
+        This app serves to analyze tweet sentiments of a
+        specific person or hashtag in a specific range of time.
+    </p>
+
+    <div class="container">
+        <form method='post' action='/'>
+            <div class="row">
+                <div class="col-25">
+                    <label for="twitter-user">Twitter User</label>
+                </div>
+                <div class="col-75">
+                    <input height="10" type="text" name="username" class="form-control" placeholder="Enter username or hashtag..." required autofocus>
+                </div>
+
+                <div class="col-25">
+                    <label for="from">From</label>
+                </div>
+                <div class="col-75">
+                    <input id="startDate" type="date" name="from" class="form-control" required>
+                </div>
+
+                <div class="col-25">
+                    <label for="to">To</label>
+                </div>
+                <div class="col-75">
+                    <input id="endDate" type="date" name="to" class="form-control" required>
+                </div>
+            </div>
+
+            <div class="row">
+                <input type="submit" value="Start analyzing!">
+            </div>
+        </form>
+    </div>
+
+    <div>
+        {% for table in tables %}
+        {{ table|safe }}
+        {% endfor %}
+    </div>
+
+    <div>
+        <a href="https://github.com/daQuincy/Twitter-Sentiment-Analysis-Flask-App">View this project on GitHub</a>
+    </div>
+
+    <script>
+        document.getElementById("endDate").addEventListener("change", function() {
+            var endDate = new Date(this.value);
+            var startDate = new Date(document.getElementById("startDate").value);
+            if (endDate <= startDate) {
+                alert("Please choose a date that is later than the start.")
+                this.value = null;
+            }
+            console.log(startDate); //e.g. Fri Nov 13 2015 00:00:00 GMT+0000 (GMT Standard Time)
+            console.log(endDate);
+        });
+    </script>
+</body>
+
+</html>

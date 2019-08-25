@@ -1,6 +1,5 @@
 *.h5
-<<<<<<< HEAD
-=======
 *.p
 *.w2v
->>>>>>> fix
+keys.json
+reference.txt
